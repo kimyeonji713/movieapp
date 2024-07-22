@@ -54,7 +54,7 @@ export const Header = () => {
           <Link to={routes.home}>HOME</Link>
         </li>
         <li>
-          <Link to={routes.detail}>Search</Link>
+          <Link to={routes.search}>Search</Link>
         </li>
       </Menu>
     </Container>
