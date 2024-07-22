@@ -28,3 +28,8 @@ export const upcoming = () =>
 
 export const movieDetail = (movie_id) =>
   fetch(url(`movie/${movie_id}`), options).then((res) => res.json());
+
+export const searchMovie = (keyword) => {
+  const searchUrl = baseUrl + `search/movie?query=${keyword}&language=ko-kr`;
+  return fetch(searchUrl, options).then((res) => res.json());
+};
