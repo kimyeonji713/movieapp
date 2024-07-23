@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { spacing } from "../../GlobalStyled";
 import { useEffect, useState } from "react";
 import { searchMovie } from "../../api";
+import { Link } from "react-router-dom";
+import { Loading } from "../../components/Loading";
+import { W500_URL } from "../../constant/imgUrl";
 
 const Container = styled.div`
   padding: 150px ${spacing.side};
@@ -40,7 +43,30 @@ const ErrorMessage = styled.h4`
   margin-top: 20px;
 `;
 
+const ConWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* (옆으로 반복할 갯수, 나열하는 각자의 크기 값) */
+  /* fr: 하나씩 공등한 값을 똑같이 나눠가진다. */
+  row-gap: 30px;
+  /* 위아래 간격, 그리드만의 간격 */
+  column-gap: 15px;
+  /* 양 옆 간격 */
+`;
+
+const Con = styled.div``;
+
+const Bg = styled.div`
+  height: 400px;
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
 export const Search = () => {
+  const [searchData, setSearchData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const {
     register,
     handleSubmit,
@@ -49,12 +75,15 @@ export const Search = () => {
 
   const onSearchResult = async (data) => {
     const { keyword } = data;
-    const result = await searchMovie(keyword);
-    console.log(result);
+    const { results } = await searchMovie(keyword);
+    // console.log(result);
+    setSearchData(results);
+    setIsLoading(false);
   };
 
+  // console.log(searchData?.length === 0 ? "없음" : "있음");
   // console.log(searchMovie);
-  // console.log(errors?.keyword?.message);
+  // console.log(errors?.keyword?.message ? "" : errors?.keyword?.message);
 
   return (
     <Container>
@@ -72,6 +101,35 @@ export const Search = () => {
 
         <ErrorMessage>{errors?.keyword?.message}</ErrorMessage>
       </Form>
+
+      {searchData?.length === 0 ? (
+        "검색결과없음"
+      ) : (
+        <>
+          {searchData && (
+            <ConWrap>
+              {isLoading ? (
+                <Loading />
+              ) : (
+                <>
+                  {searchData.map((data) => (
+                    <Con key={data.id}>
+                      <Link to={`/detail/${data.id}`}>
+                        <Bg>
+                          <img
+                            src={W500_URL + data.poster_path}
+                            alt={data.title}
+                          />
+                        </Bg>
+                      </Link>
+                    </Con>
+                  ))}
+                </>
+              )}
+            </ConWrap>
+          )}
+        </>
+      )}
     </Container>
   );
 };
