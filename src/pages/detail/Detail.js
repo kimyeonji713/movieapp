@@ -6,6 +6,7 @@ import { spacing } from "../../GlobalStyled";
 import { Loading } from "../../components/Loading";
 import { useParams } from "react-router-dom";
 import { useScrollTop } from "../../lib/useScrollTop";
+import { PageTitle } from "../../components/PageTitle";
 
 const Container = styled.div`
   padding: 150px 20%;
@@ -122,6 +123,7 @@ export const Detail = () => {
         <Loading />
       ) : (
         <Container>
+          <PageTitle title={movieData.title} />
           <CoverImg
             src={ORIGIN_URL + movieData.poster_path}
             alt={movieData.title}
