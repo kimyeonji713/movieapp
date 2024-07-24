@@ -81,6 +81,9 @@ export const Search = () => {
     setIsLoading(false);
   };
 
+  // console.log(searchData);
+  // undefined면 검색 내용을 입력해주세요. length 값이 0이면 검색 결과 없음
+
   // console.log(searchData?.length === 0 ? "없음" : "있음");
   // console.log(searchMovie);
   // console.log(errors?.keyword?.message ? "" : errors?.keyword?.message);

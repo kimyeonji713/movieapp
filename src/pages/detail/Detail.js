@@ -5,6 +5,7 @@ import { ORIGIN_URL, W500_URL } from "../../constant/imgUrl";
 import { spacing } from "../../GlobalStyled";
 import { Loading } from "../../components/Loading";
 import { useParams } from "react-router-dom";
+import { useScrollTop } from "../../lib/useScrollTop";
 
 const Container = styled.div`
   padding: 150px 20%;
@@ -91,6 +92,7 @@ const Desc = styled.div`
 `;
 
 export const Detail = () => {
+  useScrollTop();
   const [movieData, setMovieData] = useState();
   const [isLoading, setIsLoading] = useState(true);
   // const params = useParams();
