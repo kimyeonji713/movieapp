@@ -99,7 +99,7 @@ export const Detail = () => {
   // const params = useParams();
   const { id: movieId } = useParams();
   // console.log(params);
-  console.log(movieId);
+  // console.log(movieId);
 
   useEffect(() => {
     (async () => {
@@ -114,7 +114,8 @@ export const Detail = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [movieId]);
+  // 추후에 생길 문제를 방지해줌.
 
   // console.log(movieData);
   return (
